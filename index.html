@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Heart Disease Prediction</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body class="container mt-4">
+    <h2 class="text-center">Heart Disease Prediction</h2>
+    <form method="POST" action="/predict">
+        <div class="row">
+            {% set labels = [
+                'Age', 'Sex (1=Male, 0=Female)', 'Chest Pain Type (0–3)',
+                'Resting Blood Pressure', 'Cholesterol', 'Fasting Blood Sugar (>120)',
+                'Rest ECG (0–2)', 'Max Heart Rate Achieved', 'Exercise Induced Angina (1/0)',
+                'Oldpeak (ST depression)', 'Slope (0–2)', 'CA (0–3)', 'Thal (1=normal, 2=fixed, 3=reversible)'
+            ] %}
+            {% for i in range(13) %}
+            <div class="form-group col-md-4">
+                <label>{{ labels[i] }}</label>
+                <input type="number" step="any" name="f{{ i }}" required class="form-control">
+            </div>
+            {% endfor %}
+        </div>
+        <button type="submit" class="btn btn-primary">Predict</button>
+    </form>
+    {% if prediction %}
+    <div class="alert alert-info mt-4">{{ prediction }}</div>
+    {% endif %}
+</body>
+</html>
